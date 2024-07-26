@@ -1,0 +1,19 @@
+Exercício 1: Cadastro de Livros
+
+Crie uma struct Livro com os campos titulo, autor e ano. Escreva uma função cadastrarLivro que receba como parâmetro uma struct Livro e a armazene em um vetor de structs Livro. A função deve também imprimir os dados do livro cadastrado.
+
+Exercício 2: Controle de Estoque
+
+Crie uma struct Produto com os campos nome, quantidade e preco. Escreva uma função adicionarProduto que receba como parâmetro uma struct Produto e a adicione a um vetor de structs Produto. A função deve também imprimir os dados do produto adicionado.
+
+Exercício 3: Gerenciamento de Contas Bancárias
+
+Crie uma struct Conta com os campos numero, saldo e titular. Escreva uma função criarConta que receba como parâmetro uma struct Conta e a armazene em um vetor de structs Conta. A função deve também imprimir os dados da conta criada.
+
+Exercício 4: Registro de Alunos
+
+Crie uma struct Aluno com os campos nome, matricula e nota. Escreva uma função registrarAluno que receba como parâmetro uma struct Aluno e a armazene em um vetor de structs Aluno. A função deve também imprimir os dados do aluno registrado.
+
+Exercício 5: Gestão de Funcionários
+
+Crie uma struct Funcionario com os campos nome, cargo e salario. Escreva uma função contratarFuncionario que receba como parâmetro uma struct Funcionario e a armazene em um vetor de structs Funcionario. A função deve também imprimir os dados do funcionário contratado.
