@@ -17,14 +17,43 @@ struct Livros
 }; typedef struct Livros livros; 
 
 
-livros cadastrar_livros(livros livros)
+livros cadastrar_livros()
 {
+    livros livros;
 
+    printf("Cadastrar Livros:\n");
+    printf("Nome do livro:\n");
+    scanf("%49s", &livros.titulo);
+    printf("Nome do autor:\n");
+    scanf("%49s", &livros.autor);
+    printf("Ano do livro:\n");
+    scanf("%d", livros.ano);
+
+    return livros;
+
+}   
+
+void imprimir_livros(livros imprimir)
+{
+    printf("Livro: %s49", imprimir.titulo);
+    printf("Autor: %s49", imprimir.autor);
+    printf("Ano: %d", imprimir.ano);
 }
 
 
 
 int main()
 {
+    livros livros[10];
+    
+    int i;
+
+    for (i = 0; i <10 ; i++)
+    {
+        livros[i] = cadastrar_livros();
+        imprimir_livros(livros[i]);
+    }
+ 
+ 
     return 0;
 }
