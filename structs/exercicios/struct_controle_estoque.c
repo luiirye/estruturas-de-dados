@@ -17,7 +17,7 @@ struct Produto
 
 }; typedef produto;
 
-void adicionar_Produto(produto produto)
+void adicionar_Produto(struct Produto produto)
 {
     printf("adicionar produtos:\n");
     printf("Nome do produto:\n");
@@ -25,12 +25,27 @@ void adicionar_Produto(produto produto)
     printf("Quantidade do produto:\n");
     scanf("%d", produto.quantidade);
     printf("Preco do protudo:\n");
-    scanf(".2f", produto.preco);
+    scanf("%.2f", produto.preco);
 
-    produto imprime;
+    struct Produto imprime;
+
+    printf("==================\n");
+    printf("nome: %s49\n", imprime.nome);
+    printf("qunatidade: %d\n", imprime.quantidade);
+    printf("preco: %.2f\n", imprime.preco);
 }
 
 int main ()
 {
+
+    produto produtos [10];
+
+    int i;
+
+    for (i = 0; i <= 10; i++)
+    {
+        //printf(produtos[i]);
+    }
+
     return 0;
 }
