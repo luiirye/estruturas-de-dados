@@ -18,8 +18,8 @@ int troca_variavel(int a, int b)
     b = tempo;
 
     printf("Valores trocados\n");
-    printf("Valor de a:%d\n", a);
-    printf("Valor de b:%d\n", b);
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
 
     return tempo;
 }
@@ -30,9 +30,9 @@ int main()
     //int troca;
     printf("insira dois numeros:\n");
     scanf("%d %d", &x, &y);
-    printf("Valores de:\n");
-    printf("a:%d\n", x);
-    printf("b:%d\n", y);
+    printf("Valores originais:\n");
+    printf("a = %d\n", x);
+    printf("b = %d\n", y);
     
     troca_variavel(x, y);
     
