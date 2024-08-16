@@ -17,3 +17,6 @@ int main()
     
     return 0;
 }
+/*
+o "*" é o conteúdo de um endereço;
+*/
