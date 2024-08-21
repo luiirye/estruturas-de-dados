@@ -8,24 +8,24 @@ tera o valor de A.
 #include <stdio.h>
 #include <stdlib.h>
 
-void troca(int, int);
+void troca(int*, int*);
 
 int main()
 {
     int x, y;
     printf("informe dois numeros inteiros:\n");
-    scanf("%d %d", x, y);
+    scanf("%d %d", &x, &y);
 
     printf("x = %d y = %d\n", x, y);
-    troca(x, y);
+    troca(&x, &y);
     printf("troca de conteudos:\n");
     printf("x = %d y = %d\n", x, y);
     return 0;
 }
 
-void troca(int &a, int &b)
+void troca(int *a, int *b)
 {
-    int aux = a;
-    a = b;
-    b = aux;
+    int aux = *a;
+    *a = *b;
+    *b = aux;
 }
