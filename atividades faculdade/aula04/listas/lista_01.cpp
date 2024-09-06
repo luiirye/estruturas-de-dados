@@ -21,18 +21,32 @@ struct lista
 };typedef struct lista node;
 // struct lista agora pode ser chamada usando "node"
 
-int insere_lista(node* lista, int numero)
+/*Função que aloca um node na memória*/
+node *aloca()
+{
+    node* aux;
+    aux = (node*)malloc(sizeof(node));
+    return aux;
+}
+
+int lista_vazia(node* lista)
+{
+    if(lista == NULL)
+    {
+        printf("a lista esta vazia!!");
+    }
+}
+
+int insere_lista(node* lista, int info)
 {
     node* novo;
-    if (novo == NULL)
+    novo = aloca();
+    if(novo == NULL);
     {
-        printf("Erro de alocacao de memoria!\n");
-        exit(1);
-    }
-    novo->info = numero;
-    novo->proximo = lista;
-    return (novo);
+        printf("erro na alocacao de memoria");
+    } 
 }
+
 
 
 int main()

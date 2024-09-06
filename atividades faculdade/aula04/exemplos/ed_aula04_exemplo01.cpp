@@ -1,4 +1,4 @@
-//Manipulação de Listas usando alocação encadeada
+//Manipulaï¿½ï¿½o de Listas usando alocaï¿½ï¿½o encadeada
 
 //Bibliotecas
 #include <stdio.h>
@@ -6,7 +6,7 @@
 #include <locale.h>
 #include <ctype.h>
 
-//Definições
+//Definiï¿½ï¿½es
 struct lista{
    int info;
    struct lista *prox;
@@ -14,7 +14,7 @@ struct lista{
 
 typedef struct lista node;
 
-//Prototipação das funções
+//Prototipaï¿½ï¿½o das funï¿½ï¿½es
 char menu();
 int listaVazia(node *);
 node *aloca();
@@ -25,24 +25,24 @@ void destroiLista (node *);
 //Programa Principal
 int main(){
 	setlocale(LC_ALL,"");
-	node *lista = NULL;  //aponta para o início da lista
-   	node *aux;  //variável auxiliar
-   	int x;		//variável auxiliar
+	node *lista = NULL;  //aponta para o inï¿½cio da lista
+   	node *aux;  //variï¿½vel auxiliar
+   	int x;		//variï¿½vel auxiliar
    	char op;    //variavel que guarda a opcao do menu
    	do{
    	  	system("cls");
-		printf("MENU DE OPÇÕES\n");
+		printf("MENU DE OPï¿½ï¿½ES\n");
       	//a variavel op recebe a opcao do menu escolhida em menu()
       	op = menu();
       	switch(op){
-         	case 'v': //verifica se a lista está vazia
+         	case 'v': //verifica se a lista estï¿½ vazia
 				x = listaVazia(lista);
 				if (x)
  	  		   		printf("\nLista vazia");
   				else
-	  				printf("\nLista não está vazia");
+	  				printf("\nLista nï¿½o estï¿½ vazia");
             break;
-         	case 'i': //insere no início da lista
+         	case 'i': //insere no inï¿½cio da lista
          		printf("\nQual valor deseja inserir na lista? ");
 	         	scanf("%d",&x);
 	         	lista = insereInicio (lista, x);
@@ -87,7 +87,7 @@ node *insereInicio (node *lista, int valor) {
 	node *novo;
 	novo = aloca();
 	if (novo == NULL) {
-        printf("Erro de alocação de memória!\n");
+        printf("Erro de alocaï¿½ï¿½o de memï¿½ria!\n");
         exit(1);
     }
 	novo->info = valor;
@@ -110,11 +110,11 @@ void destroiLista (node *lista) {
 	if(!listaVazia(lista)){
 		node *p=lista, *q;
 		while (p != NULL) {
-			q=p->prox; 	//guarda referência p/ o próximo
-			free(p); 	//libera a memória apontada por p
-			p=q; 		//faz p apontar para o próximo
+			q=p->prox; 	//guarda referï¿½ncia p/ o prï¿½ximo
+			free(p); 	//libera a memï¿½ria apontada por p
+			p=q; 		//faz p apontar para o prï¿½ximo
 		}
-		printf("\nLista destruída com sucesso!");
+		printf("\nLista destruï¿½da com sucesso!");
 	}
 }
 
