@@ -5,15 +5,15 @@
 /* Crianção de uma lista encadeada ordenada */
 
 /*protótipos das funções*/
-int lista_esta_vazia(node*); // ok
+int lista_esta_vazia(node *); // ok
 //node *inserir(node*, int);
 node *insere(node*, int); // ok
-node *insere_inicio(node*, int); // ok
-node *insere_meio_fim(node*, int); // ok
-node *remover(node*, int); // ok
-int buscar(node*, int);  // ok
-void imprimir(node*); // ok
-void finalizar(node*);
+node *insere_inicio(node *, int); // ok
+node *insere_meio_fim(node *, int); // ok
+node *remover(node *, int); // ok
+int buscar(node *, int);  // ok
+void imprimir(node *); // ok
+void finalizar(node *);
 char menu();
 
 struct lista
@@ -38,9 +38,9 @@ int main()
         switch (opt)
         {
         case 'v':
-            x = (lista_esta_vazia(lista))
+            
         
-            if(x)
+            if((lista_esta_vazia(lista)))
             {
                 printf("\nLista vazia.");
             }
@@ -53,7 +53,7 @@ int main()
         case 'i':
             printf("\nInsira um valor:\n");
             scanf("%d", &x);
-            insere(lista, x);
+            insere_inicio(lista, x);
             break;
 
         case 'r':
@@ -86,7 +86,7 @@ int main()
     } while (opt != 'f');
 }
 
-int lista_esta_vazia(node* lista)
+int lista_esta_vazia(node* cabeca)
 {
     if(lista == NULL)
     {
@@ -126,28 +126,26 @@ node *insere_meio_fim(node* cabeca, int valor)
     {
         return novo_node;
     }
-
+        
+    node* atual = cabeca;
+    while (atual -> proximo != NULL && valor < atual -> proximo -> info)
+    {
+        atual = atual -> proximo;
+    }
+        
+    if (atual -> proximo == NULL)
+    {
+        atual -> proximo = novo_node;
+    }
+    
     else
     {
-        node* atual = cabeca;
-        while (atual -> proximo != NULL && valor < atual -> proximo -> info)
-        {
-            atual = atual -> proximo;
-        }
-        
-        if (atual -> proximo == NULL)
-        {
-            atual -> proximo = novo_node;
-        }
-
-        else
-        {
-            novo_node -> proximo = atual ->proximo;
-            atual -> proximo = novo_node;
-        }
-        
-        return cabeca;
+        novo_node -> proximo = atual ->proximo;
+        atual -> proximo = novo_node;
     }
+        
+    return cabeca;
+    
 } 
 
 node *remover(node* cabeca, int valor)
