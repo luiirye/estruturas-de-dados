@@ -85,14 +85,39 @@ node *busca(node **lista, int valor)
 
 node *remove(node *lista, int valor)
 {
-    //Remove percorre toda a lista, comparando os valores de info com valor;
-    //Quando os valores coincidirem, liberar o nó;
-    //O nó anterior ao nó removido, aponta para o nó seguinte ao nó;
-    node *aux;
-    
-    while ()
+    node *aux; //ponteiro auxiliar para percorrer a lista
+    node * ant = NULL; //ponteiro com elemento anterior
+
+    //procura elemento na lista, guardando anterior;
+    while (aux != NULL && aux -> info != valor)
     {
-        /* code */
+        ant = aux;
+        aux = aux -> prox;
+    }
+    
+    /*Verifica se achou elemento*/
+    if(aux == NULL)
+    {
+        printf("\nElemento nao encontrado\n");
+        return lista;
+        //se não encontrar, retorna a lista original
+    }
+
+    /*retira elemento*/
+    if(ant == NULL)
+    {
+        
+    }
+   
+}
+
+/*Função para imprimir os elementos da lista*/
+void imprime_lista(node* lista)
+{
+    node *imprime;
+    for (imprime = lista ; imprime != NULL; imprime -> prox)
+    {
+        printf("Elementos = %d\n", imprime -> info);
     }
     
 }
