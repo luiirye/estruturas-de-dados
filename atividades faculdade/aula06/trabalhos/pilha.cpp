@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
+/*Representa cada elemento(dado, info, numero) na pilha*/
 struct Pilha
 {
     int num;
@@ -9,11 +11,9 @@ struct Pilha
 typedef struct Pilha node;
 
 char menu();
-node push(node *, int); // função empilhar elemento (inserir elemento no início (topo));
-node pop(node *, int); // função para desempilhar elemento (remoção no início (topo));
-node clear(node *); // função para limpar a pilha;
-node isEmpty(node *);// verifica se a pilha está vazia;
-
+node* aloca();
+node* push(node *, int); // função empilhar elemento (inserir elemento no início (topo));
+node* pop(node *, int); // função para desempilhar elemento (remoção no início (topo));
 
 int main ()
 {
@@ -35,10 +35,31 @@ char menu()
 }
 
 /*Função para alocar um novo node*/
-node *aloca()
+node* aloca()
 {
     node *aux;
     aux = (node*)malloc(sizeof(node));
     return aux;
 }
+
+node* push (node *topo, int valor)
+{
+    node* novo = aloca();
+    
+    novo -> num = valor;
+    novo -> prox = topo;
+    return topo;
+    
+}
+
+node* pop (node *topo, int valor)
+{
+    if (valor != NULL)
+    {   
+        
+    }
+    
+}
+
+
 
