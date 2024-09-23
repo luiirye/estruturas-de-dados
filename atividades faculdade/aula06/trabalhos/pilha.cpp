@@ -10,31 +10,28 @@ struct Pilha
 };
 typedef struct Pilha node;
 
-char menu();
+int menu();
 node* aloca();
-node* push(node *, int); // função empilhar elemento (inserir elemento no início (topo));
-node* pop(node *, int); // função para desempilhar elemento (remoção no início (topo));
+node* push(node **, int); 
+node* pop(node **, int); 
+void liberar_pilha(node **);
+void exibir_pilha(node*);
 
-int main ()
-{
-    return 0;
-}
+node *topo = NULL;
 
-char menu()
+
+int menu()
 {
     int opt;
     printf("1 - Exibir Pilha\n");
-    printf("2 - Push");
-    printf("3 - Pop");
-    printf("4 - Liberar Pilha");
-    printf("0 - Sair");
+    printf("2 - Push\n");
+    printf("3 - Pop\n");
+    printf("4 - Liberar Pilha\n");
+    printf("0 - Sair\n");
     scanf("%d", &opt);
-    fflush(stdin);
-    opt = tolower(opt);
     return opt;
 }
 
-/*Função para alocar um novo node*/
 node* aloca()
 {
     node *aux;
@@ -42,24 +39,92 @@ node* aloca()
     return aux;
 }
 
-node* push (node *topo, int valor)
+node* push (node **topo, int valor)
 {
     node* novo = aloca();
     
     novo -> num = valor;
-    novo -> prox = topo;
-    return topo;
+    novo -> prox = *topo;
+    *topo = novo;
+    return *topo;
     
 }
 
-node* pop (node *topo, int valor)
+node* pop (node **topo)
 {
-    if (valor != NULL)
+    if (*topo == NULL)
     {   
-        
-    }
+        printf("\n\nA pilha está vazia\n\n");
+    }   
     
+    else
+    {
+        node *aux;
+        aux = *topo;
+        *topo = (*topo) -> prox;
+        printf("\n\n%d Numero Retirado\n\n", aux -> num);
+        free(aux);
+    }
+    return *topo;
 }
 
+void liberar_pilha(node **topo)
+{
+    node *aux;
+    while(*topo != NULL)
+    {
+        aux = *topo;
+        *topo = (*topo) -> prox;
+        free(aux);
+    }
+    *topo = NULL;
+}
 
+void exibir_pilha(node* pilha)
+{
+    printf("Conteudo da pilha:\n");
+    while(pilha != NULL)
+    {
+        printf("%d", pilha -> num);
+        pilha = pilha -> prox;
+    }
+}
 
+int main ()
+{
+    int opt, valor;
+    node* pilha = NULL;
+
+    do
+    {
+        opt = menu();
+        switch (opt)
+        {
+            case 1:
+            exibir_pilha (pilha);
+            break;
+
+            case 2:
+            printf("Digite o valor a ser empilhado:\n");
+            scanf("%d", &valor);
+            pilha = push(&pilha, valor);
+            break;
+
+            case 3:
+            pilha = pop (&pilha);
+            printf("ultimo elemento desempilhado.\n");
+            break;
+
+            case 4:
+            liberar_pilha(&pilha);
+            pilha = NULL;
+            break;
+
+            default:
+            printf("Opcao invalida!\n");
+        } 
+    }
+    while (opt != 0); 
+
+    return 0;
+}
