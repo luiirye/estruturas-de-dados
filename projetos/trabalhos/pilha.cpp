@@ -7,13 +7,15 @@ struct Pilha
 {
     int num;
     struct Pilha* prox;
-};typedef struct Pilha node;
+};
+typedef struct Pilha node;
 
+node* inicia_pilha(node*);
+node* aloca();
 void exibir_pilha(node*);
-node* push(node* , int);
+node* push(node*, int);
 node* pop(node*);
 node* liberar_pilha(node*);
-node* aloca();
 
 node* aloca()
 {
@@ -21,52 +23,20 @@ node* aloca()
     return aux;
 }
 
+node* inicia_pilha(node* pilha)
+{
+    pilha -> prox = NULL;
+}
+
 void exibir_pilha(node* pilha)
 {
-    if (pilha -> prox == NULL)
+    node* aux = aloca();
+    aux = pilha -> num;
+    printf("Pilha:\n");
+    while (aux != NULL)
     {
-        printf("pilha esta vazia, nada para exibir.\n");
-        return 1;
-    }
-
-    else
-    {
-
-    }
-
-}
-
-node* push(node* pilha, int valor)
-{
-    node* novo;
-    novo = aloca();
-    pilha -> prox = NULL;
-    
-    
-
-   
-}
-
-node* pop(node* pilha)
-{
-    node* novo;
-    novo = aloca();
-    
-    
-}
-
-node* liberar_pilha(node* pilha)
-{
-    if (pilha == NULL)
-    {
-        printf("Pilha vazia, nada para remover!\n");
-    }
-
-    else
-    {
-        pilha -> prox = NULL;
-        free(pilha);
-        return pilha;
+        printf("%d", aux -> pilha);
+        aux = aux -> prox;
     }
 }
 
