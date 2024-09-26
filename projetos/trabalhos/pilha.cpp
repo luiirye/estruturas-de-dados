@@ -40,6 +40,13 @@ void exibir_pilha(node* pilha)
     }
 }
 
+node* push(node*, int valor)
+{
+    node* aux;
+    aux = aloca();
+
+}
+
 int main()
 {
     int opt;
