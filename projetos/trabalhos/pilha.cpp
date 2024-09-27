@@ -10,12 +10,13 @@ struct Pilha
 };
 typedef struct Pilha node;
 
-node* inicia_pilha(node*);
 node* aloca();
-void exibir_pilha(node*);
+node* inicia_pilha(node*);
+node* pilha_vazia(node*);
 node* push(node*, int);
 node* pop(node*);
-node* liberar_pilha(node*);
+void exibir_pilha(node*);
+
 
 node* aloca()
 {
@@ -28,23 +29,53 @@ node* inicia_pilha(node* pilha)
     pilha -> prox = NULL;
 }
 
-void exibir_pilha(node* pilha)
+node* pilha_vazia(node* pilha)
 {
-    node* aux = aloca();
-    aux = pilha -> num;
-    printf("Pilha:\n");
-    while (aux != NULL)
+    if (pilha -> prox == NULL)
     {
-        printf("%d", aux -> pilha);
-        aux = aux -> prox;
+        printf("pilha vazia\n");
+        return 0;
     }
 }
 
-node* push(node*, int valor)
+
+node* push(node* pilha, int valor)
 {
     node* aux;
     aux = aloca();
 
+    if (!pilha_vazia(pilha))
+    {
+        aux -> prox = pilha;
+    }
+    
+    pilha = aux;
+}
+
+node* pop(node* pilha, int valor)
+{
+    node* aux;
+
+    if (pilha_vazia(pilha))
+    {
+        return 0;
+    }
+
+    aux = pilha;
+    valor = aux -> num;
+    pilha = pilha -> prox;
+    free(aux);
+    
+}
+
+void exibir_pilha(node* pilha)
+{
+    while (pilha != NULL)
+    {
+        printf("Conteudo(s) da pilha: %d\n", pilha -> num);
+        pilha = pilha -> prox;
+    }
+    printf("\n");
 }
 
 int main()
@@ -82,7 +113,7 @@ int main()
             break;
         case 4:
             printf("Liberando memória...\n");
-            liberar_pilha(pilha);
+            //liberar_pilha(pilha);
             printf("Memoria liberada!\n");
             printf("Pilha esta vazia agora.\n");
             break;
