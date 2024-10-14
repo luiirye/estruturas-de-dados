@@ -46,7 +46,7 @@ node* push (node* pilha, int valor)
 
 int main()
 {
-    printf("vai tomar no cu nao aguento mais isso\n");
+
     
     return 0;
 }

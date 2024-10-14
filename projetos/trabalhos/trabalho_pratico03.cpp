@@ -1,41 +1,123 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct Pilha{
-    int num;
+    float num;
     struct Pilha *prox;
 };
-typedef struct Pilha pilha;
+typedef struct Pilha node;
 
-/*
-• Criar uma pilha vazia
-• Inserir um elemento no topo da pilha
-• Remover um elemento do topo de pilha
-• Consultar o topo da pilha
-• Destruir a pilha
-• Verificar se é cheia
-• Verificar se é vazia
-*/
-pilha* cria_pilha();
-void libera_pilha(pilha* );
-int consulta_topo_pilha(pilha*, int);
-pilha* push(pilha*, int);
-pilha* pop(pilha*);
+node* aloca();
+node* push(node*, float);
+node* pop(node*);
+float operacao(float, float, char);
+float resolver_operacao(char[]);
 
 
-pilha aloca(pilha*){
-    pilha *aux;
-    aux = (pilha*) malloc(sizeof(pilha));
+node* aloca(){
+    node* aux = (node*) malloc(sizeof(node));
     return aux;
 }
 
-pilha push (pilha* p, int v){
+node* push (node* p, float v){
 
+    node *novo = aloca();
+
+    if(novo){
+        novo -> num = v;
+        novo -> prox = p;
+        return novo;
+    }
+    
+    else{
+        printf("Erro de alocacao de memoria.\n");
+        return NULL;
+    }
+    return novo;    
+}
+
+node* pop (node **p){
+
+    node *remove = NULL;
+
+    if(*p){
+        remove = *p;
+        *p = remove -> prox;
+    }
+
+    else{
+        printf("\nPilha vazia.\n");
+    }
+    return remove;
+}
+
+float operacao(float a, float b, char x){
+    switch (x)
+    {
+        case '+':
+        return a + b;
+        break;
+
+        case '-':
+        return a - b;
+        break;
+
+        case '/':
+            if (b != 0)
+            {
+                printf("Nao da para fazer divisao por 0!!");
+                return 0.0;
+            }
+        return a / b;  
+        break;     
+                
+        case '*':
+        return a * b;
+        break;
+
+        default:
+        return 0.0;
+    }
+}
+
+float resolver_operacao(char x[]){
+    char *pt;
+    float num;
+    node *n1, *n2, *pilha = NULL;
+    
+    pt = strtok(x, " ");
+    while (pt)
+    {
+        if (pt[0] == '+' || pt [0] == '-' || pt[0] == '/' || pt[0] == '*')
+        {
+            n1 = pop(&pilha);
+            n2 = pop(&pilha);
+            num = operacao(n2 -> num, n1 -> num, pt[0]);
+            pilha = push(pilha, num);
+            free(n1);
+            free(n2);
+        }
+        else{
+            num = strtol(pt, NULL, 10);
+            pilha = push(pilha, num);
+        }
+        
+        pt = strtok(NULL, " ");
+    }
+
+    n1 = pop(&pilha);
+    num = n1 -> num;
+    free(n1);
+    return num;
 }
 
 int main(){
     
-    printf("Hello World");
+    char exp[50];
+    printf("Digite a expressao: \n");
+    scanf("%49s", exp);
+    printf("Resultado da expressao: %s: \n", exp);
     return 0;
 }
 
