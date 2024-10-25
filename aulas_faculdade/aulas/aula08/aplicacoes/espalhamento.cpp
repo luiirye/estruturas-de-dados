@@ -7,34 +7,67 @@ struct Lista{
 };
 typedef struct Lista lista;
 
+int menu();
+lista* aloca();
+lista* inserir(lista*, int);
+lista* remover(lista*, int);
+lista* busca(lista*, int);
+void imprime(lista*);
+
 int main(){
-    int x;
-    scanf("%d", &x);
-    while (menu)
-    {
-        switch (x)
-        {
-        case /* constant-expression */:
-            /* code */
+    lista* l = NULL;
+    //lista iniciada vazia
+    lista* aux; //ponteiro auxiliar
+    int x; //variavel inteira auxiliar;
+    int op; // variavel para opcao e utilizar o menu
+
+    do{
+        printf("MENU DE OPCOES\n");
+        op = menu();
+
+        switch(op){
+            case 1:
+                printf("Insira um valor:\n");
+                scanf("%d", &x);
+                l = inserir(l, x);
             break;
-        
-        default:
+
+            case 2:
+                printf("Digite um valor para ser removido:\n");
+                scanf("%d", &x);
+                l = remover(l, x);
             break;
+
+            case 3:
+                printf("Digite o numero para encontrar seu endereco:\n");
+                scanf("%d", &x);
+                busca(l, x);
+            break;
+
+            case 4:
+                imprime(l);
+            break;
+            
+            case 5:
+                printf("Encerrando...\n");
+                exit(0);
+            break;
+            default:
+                printf("\nOpcao Invalida");
         }
-    }
-    
-    return 0;
+        printf("\n\n\n");
+        system("pause");
+    } while (op != 5);
 }
 
 int menu(){
     int opt;
-    printf("================\n");
     printf("1 - Inserir\n");
     printf("2 - Remover\n");
-    printf("3 - Buscar\n");
-    printf("4 - Imprimir\n");
-    printf("5 - Finalizar");
-    printf("================\n");
+    printf("3 - Busca\n");
+    printf("4 - Imprime lista\n");
+    printf("5 - Encerrar\n");
+    fflush(stdin);
     scanf("%d", &opt);
     return opt;
 }
