@@ -7,47 +7,75 @@ Exibir valores ordenados na tela.
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int ordenado(int*, int*, int*);
 int main(){
 
-    int x, y, z;
+    int A, B, C;
     //int teste;
     printf("Digite tres numeros inteiros:\n");
-    printf("Valor de X:\n");
-    scanf("%d", &x);
-    printf("Valor de Y:\n");
-    scanf("%d", &y);
-    printf("Valor de Z:\n");
-    scanf("%d", &z);
+    printf("Valor de A:\n");
+    scanf("%d", &A);
+    printf("Valor de B:\n");
+    scanf("%d", &B);
+    printf("Valor de C:\n");
+    scanf("%d", &C);
     
-    ordenado(&x, &y, &z);
-    printf("valores em ordem:\n");
-    printf("%d\n%d\n%d\n", x, y, z);
+    ordenado(&A, &B, &C);
 
+    if(ordenado(&A, &B, &C) == 1){
+        printf("Os valores sao iguais.\n");
+    }
+    else{
+        printf("Valores ordenados:\n");
+        printf("A = %d\nB = %d\nC = %d\n", A, B, C);
+    }
+    
     return(0);
 }
 
 int ordenado(int *a, int *b, int *c){
         
-        int aux, aux2;
+        int aux;
+        //correto
+        if (*a == *b && *a == *c){
+            return (1);
+        }
+
+        if(*a != *b && *b != *c){
+            //possibilidade 1 2 3
+            if(*a < *b && *b < *c){
+                return(0);
+            }
+            //possibilidade 3 2 1
+            if(*a > *b && *b > *c){
+                aux = *a;
+                *a = *c;
+                *c = aux;
+            }
+            //possibilidade 2 3 1
+            if(*a < *b && *a > *c){
+                aux = *b;
+                *b = *a;
+                *a = *c;
+                *c = aux; 
+            }
+            //possibilidade 2 1 3
+            if(*a > *b && *a < *c){
+                aux = *a;
+                *a = *b;
+                *b = aux;
+                *c = *c; 
+            }
+            //possibilidade 3 1 2
+            if(*a > *c && *b < *c){
+                aux = *a;
+                *a = *b;
+                *b = *c;
+                *c = aux;
+            }
         
-        if (*a > *b && *a > *c){
-            aux = *a;
-            
-        }
-
-        if (*b < *a && *b < *c) {
-            aux = *b;
-            aux2 = *a;
-            *a = aux;
-            *b = aux2;
-        }
-
-        if(*c < *a && *c < *b){
-            aux = *c;
-            aux2 = *a;
-            *a = aux;
-            *c = aux2;    
-        }
+            return(0);
+        }    
 }
