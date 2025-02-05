@@ -3,10 +3,16 @@
 
 /*
 Altere a função calculaArea para que a mesma receba um ponteiro para pararalelepípedo.
+
+-> FEITO
+
 */
 
 /*
 Qual a diferença conceitual entre passar um tipo Pararalelepípedo ou passar um ponteiro para pararalelepípedo?
+
+Com ponteiro, é passado o endereço e o valor alterado pelo endereço.
+
 */
 
 /*
@@ -25,9 +31,9 @@ struct Paralelepipedo{
 };typedef struct Paralelepipedo Paralelepipedo;
 
 //Protótipos das funções
-void calculaArea(Paralelepipedo p);
-void calculaVolume(Paralelepipedo p);
-void calculaMassa(Paralelepipedo p);
+void calculaArea(Paralelepipedo *p);
+void calculaVolume(Paralelepipedo *p);
+void calculaMassa(Paralelepipedo *p);
 
 int main(){
     
@@ -53,39 +59,39 @@ int main(){
 
     //Chamada das funções de cálculo;
 
-    calculaArea(p);
-    calculaVolume(p);
-    calculaMassa(p);
+    calculaArea(&p);
+    calculaVolume(&p);
+    calculaMassa(&p);
 
     return(0);
 }
 
 //Declaração das funções de cálculos;
 
-void calculaArea(Paralelepipedo x){
+void calculaArea(Paralelepipedo *x){
     float area;
     float a, b, c;
-    a = (2*x.largura_l*x.comprimento_c);
-    b = (2*x.largura_l*x.altura_h);
-    c = (2*x.comprimento_c*x.altura_h);
+    a = (2 * (x -> largura_l) * (x -> comprimento_c));
+    b = (2 * (x -> largura_l) * (x -> altura_h));
+    c = (2 * (x -> comprimento_c) * (x -> altura_h));
     area = (a + b + c);
 
     printf("Area Total = %.2f\n", area);
 }
 
-void calculaVolume(Paralelepipedo y){
+void calculaVolume(Paralelepipedo *y){
     float volume;
-    volume = (y.largura_l * y.comprimento_c * y.altura_h);
+    volume = (y -> largura_l * y -> comprimento_c * y -> altura_h);
 
     printf("Volume Total = %.2f\n", volume);
 }
 
-void calculaMassa(Paralelepipedo z){
+void calculaMassa(Paralelepipedo *z){
     float massa;
     float volume;
-    volume = (z.largura_l * z.comprimento_c * z.altura_h);
+    volume = (z -> largura_l * z -> comprimento_c * z -> altura_h);
 
-    massa = (z.densidade_d * volume);
+    massa = (z -> densidade_d * volume);
 
     printf("Massa Total = %.2f\n", massa);
 }
