@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 
 /*
 Crie uma struct chamada Aluno que contenha os seguintes campos:
@@ -15,7 +15,7 @@ Crie uma struct chamada Aluno que contenha os seguintes campos:
 Implemente uma função chamada cadastrarAluno:
     
     - Não recebe parâmetros // ok
-    - Retornar uma struct Aluno
+    - Retornar uma struct Aluno // ok
 
 Esta função deve solicitar ao usuário que insira as informações de um aluno,
 criar uma struct Aluno com essas informações e retorná-la
@@ -43,28 +43,29 @@ matrícula, nota1, nota2 e média.
 
 
 // Estruturas (Structs)
-struct Aluno{
+
+typedef struct{
+
     char nome[50];
     int matricula;
-    float n1, n2;
-};
-typedef struct Aluno Aluno;
+    double nota1, nota2;
+}Aluno;
 
-// Protótipos de funções
+// Protótipos das funções
+void imprimeAluno(Aluno);
 Aluno cadastrarAluno();
-float calculaMedia(Aluno);
-void imprimirAluno(Aluno);
+double calculaMedia(Aluno);
 
-// Função principal
+// Função Principal
 int main(){
-
+    
     Aluno aluno1, aluno2;
 
     aluno1 = cadastrarAluno();
     aluno2 = cadastrarAluno();
 
-    imprimirAluno(aluno1);
-    imprimirAluno(aluno2);
+    imprimeAluno(aluno1);
+    imprimeAluno(aluno2);
 
     return 0;
 }
@@ -72,39 +73,44 @@ int main(){
 // Função para cadastrar um aluno
 Aluno cadastrarAluno(){
     
-    Aluno acesso; // variável para acessar a struct Aluno
+    // Variável para ter acesso a struct Aluno
+    Aluno aluno;
+
+    // Entradas de dados pelo usuário
+    printf("------------------\n");
+    printf("Cadastro de Aluno:\n");
+    printf("Nome do aluno:\n");
+    scanf("%49s", &aluno.nome);
     
-    // Entradas solicitadas para o usuário
-    printf("====================\n");
-    printf("CADASTRO DE ALUNOS:\n");
-    printf("Insira o nome do aluno:\n");
-    scanf("%49s", &acesso.nome[50]);
-    printf("Insira o numero de matricula desse aluno:\n");
-    scanf("%d", &acesso.matricula);
-    printf("Informe as notas desse aluno:\n");
-    printf("Nota 1:\n");
-    scanf("%f", &acesso.n1);
-    printf("Nota 2:\n");
-    scanf("%f", &acesso.n2);
-    printf("ALuno cadastrado com sucesso!!\n");
-    printf("====================\n");
+    printf("Codigo da Matricula:\n");
+    scanf("%d", &aluno.matricula);
+    
+    printf("Nota 1 do Aluno:\n");
+    scanf("%lf", &aluno.nota1);
+    printf("Nota 2 do Aluno:\n");
+    scanf("%lf", &aluno.nota2);
+    printf("Aluno cadastrado com sucesso!\n");
+    printf("------------------\n");
+    return aluno;
 }
 
-// Função para calcular a média de um aluno
-float calculaMedia(Aluno x){
-    float media = ((x.n1 + x.n2) / 2);
+// Função para calcular a média do aluno
+double calculaMedia(Aluno al){
+    double media = (al.nota1 + al.nota2) / 2;
     return media;
 }
 
-// Função que imprime as informações do aluno
-void imprimirAluno(Aluno a){
-
-    printf("====================\n");
-    printf("INFORMACOES DO ALUNO:\n");
-    printf("Nome: %c\n", a.nome);
-    printf("Numero Matricula: %d\n", a.matricula);
-    printf("Nota 1: %.1f\n", a.n1);
-    printf("Nota 2: %.1f\n", a.n2);
-    printf("Media : %.1f\n", calculaMedia);
-    printf("====================\n");
+void imprimeAluno(Aluno al){
+    
+    // Chamada da função calcula media
+    double media = calculaMedia(al);
+    
+    printf("------------------\n");
+    printf("Informacoes do aluno:\n");
+    printf("Nome do aluno: %s\n", al.nome);
+    printf("Codigo de matricula: %d\n", al.matricula);
+    printf("Nota 1: %.1lf\n", al.nota1);
+    printf("Nota 2: %.1lf\n", al.nota2);
+    printf("Media do Aluno: %.1lf\n", media);
+    printf("------------------\n");
 }
