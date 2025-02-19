@@ -60,10 +60,12 @@ double calculaMedia(Aluno);
 int main(){
     
     Aluno aluno1, aluno2;
-
+    
+    // Função cadastraAluno atribuida as variáveis aluno 1 e 2
     aluno1 = cadastrarAluno();
     aluno2 = cadastrarAluno();
 
+    // Chamada funções de impressão
     imprimeAluno(aluno1);
     imprimeAluno(aluno2);
 
@@ -92,14 +94,17 @@ Aluno cadastrarAluno(){
     printf("Aluno cadastrado com sucesso!\n");
     printf("------------------\n");
     return aluno;
+    // retorna as informações do aluno para uma struct 
 }
 
 // Função para calcular a média do aluno
 double calculaMedia(Aluno al){
     double media = (al.nota1 + al.nota2) / 2;
     return media;
+    // Função retorna média calculada do aluno
 }
 
+// Função para imprimir as informações do Aluno
 void imprimeAluno(Aluno al){
     
     // Chamada da função calcula media
