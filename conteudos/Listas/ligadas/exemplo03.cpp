@@ -1,30 +1,44 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct Lista {
+typedef struct Lista  {
     int numero;
     struct Lista* proximo;
-};
-typedef struct Lista node;
+}node;
+// estrutura chamada "node". 
 
 
 
  
-void adicionar_fim(node *CABECA){
-
-    if(CABECA -> proximo == NULL){
-        // Se a lista está vazia, então o novo node deve ser
-        // inserido no início da lista.
-    }
-   
-    
-
+void adicionar_fim(node* CABECA){
 
 }
 
 
 void adicionar_inicio(node* CABECA){
+    
+    // criar um novo node
+    node *novo = (node*) malloc (sizeof(node));
+    // novo node alocado na memória
+    
+    // verifica se o novo node foi alocado na memoria
+    if(!novo){
+        printf("node nao alocado.\nErro de memoria!!\n");
+    }
 
+    if(!CABECA){
+
+        // novo node se torna a cabeca da lista
+        CABECA = novo;
+        novo -> proximo = NULL;
+    }
+    
+    else{
+
+        novo -> numero;
+
+    }
+    
 }
 
 void imprime(node* CABECA){
