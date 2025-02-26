@@ -34,11 +34,10 @@ void adicionar_inicio(node* CABECA){
     }
     
     else{
-
-        novo -> numero;
-
+        
+        
+        
     }
-    
 }
 
 void imprime(node* CABECA){
