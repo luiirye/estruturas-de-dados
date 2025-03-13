@@ -22,12 +22,16 @@ int main(){
 }
 
 node *aloca(){
+    
     node *aux = (node*) malloc (sizeof(node));
     return aux;
+    
 }
 
 void iniciaLista(node *CABECA){    
+    
     CABECA -> proximo = NULL;
+
 }
 
 
@@ -37,6 +41,7 @@ node insereInicio(node *CABECA, int v){
     novo -> num = v;
     novo -> proximo = CABECA;
     return novo;
+
 }
 
 node insereFim(node *CABECA, int v){
