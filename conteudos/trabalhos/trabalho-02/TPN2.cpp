@@ -12,11 +12,17 @@ struct Banco{
 typedef struct Banco Banco;
 
 // Funções para funcionalidade da lista encadeada Banco
+// protótipos para validação
 Banco *aloca(); // OK
 int Banco_vazio();
 void cria_banco();
-Banco *insere_cliente();
-Banco *remove_cliente();
+Banco *insere_cliente_inicio();
+Banco *insere_cliente_meio();
+Banco *insere_cliente_fim();
+Banco *remove_cliente_inicio();
+Banco *remove_cliente_meio();
+Banco *remove_cliente_fim();
+Banco *insere_cliente_ordenado();
 void imprime_cliente();
 int memu();
 
@@ -46,14 +52,45 @@ void cria_banco(Banco *CABECA){
     CABECA -> proximo = NULL;
 }
 
-Banco *insere_cliente(){
-    
+Banco *insere_cliente_inicio(Banco *CABECA, int a){
+    Banco *novo = aloca();
+
+    if(Banco_vazio == 1){
+        CABECA = novo;
+        novo -> numero_conta = a;
+        novo -> proximo = NULL;
+        
+    }
 }
 
-Banco *remove_cliente(){
-    
+Banco *insere_cliente_meio(){
+
+}
+
+Banco *insere_cliente_fim(){
+
+}
+
+Banco *remove_cliente_inicio(){
+
+}
+
+Banco *remove_cliente_meio(){
+
+}
+
+Banco *remove_cliente_fim(){
+
+}
+
+Banco *insere_cliente_ordenado(){
+
 }
 
 void imprime_cliente(){
 
+}
+
+int memu(){
+    
 }
