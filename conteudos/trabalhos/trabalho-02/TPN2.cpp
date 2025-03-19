@@ -24,9 +24,14 @@ Banco *remove_cliente_meio(Banco*, int); // OK
 Banco *remove_cliente_fim();
 Banco *insere_cliente_ordenado(Banco*, int); // OK 
 void imprime_cliente();
-int memu();
+int menu(int);
 
 int main(){
+    
+    int teste;
+    scanf("%d", &teste);
+    menu(teste);
+    
     return 0;
 }
 
@@ -175,7 +180,7 @@ void imprime_cliente(Banco *dark_aria){
     }
 }
 
-int memu(int opt){
+int menu(int opt){
     
     do{
         printf("Menu de Opcoes para utilizar o Banco.\n");
@@ -196,11 +201,11 @@ int memu(int opt){
 
         switch(opt){
             case 1:
-            Banco_vazio();
+            //Banco_vazio();
             break;
 
             case 2:
-            cria_banco();
+            //cria_banco();
             break;
 
             case 3:
@@ -208,11 +213,11 @@ int memu(int opt){
             break;
 
             case 4:
-            insere_cliente_meio();
+            //insere_cliente_meio();
             break;
 
             case 5:
-            insere_cliente_fim();
+            //insere_cliente_fim();
             break;
 
             case 6:
@@ -228,11 +233,11 @@ int memu(int opt){
             break;
 
             case 9:
-            remove_cliente_fim();
+            //remove_cliente_fim();
             break;
 
             case 10:
-            imprime_cliente();
+            //imprime_cliente();
             break;
 
             case 11:
