@@ -13,24 +13,66 @@ typedef struct Banco Banco;
 
 // Funções para funcionalidade da lista encadeada Banco
 // protótipos para validação
-Banco *aloca(); // OK
-int Banco_vazio(); // OK
-void cria_banco(); // OK
-Banco *insere_cliente_inicio(Banco*, int); // OK
-Banco *insere_cliente_meio(); 
-Banco *insere_cliente_fim();
-Banco *remove_cliente_inicio(Banco*, int); // OK
-Banco *remove_cliente_meio(Banco*, int); // OK
-Banco *remove_cliente_fim();
-Banco *insere_cliente_ordenado(Banco*, int); // OK 
-void imprime_cliente();
+Banco *aloca();
+int Banco_vazio(Banco*);
+Banco *cria_banco(Banco*);
+Banco *remove_inicio(Banco*, int);
+Banco *insere_ordenado(Banco*); 
+void imprime_cliente(Banco*);
 int menu(int);
 
 int main(){
     
-    int teste;
-    scanf("%d", &teste);
-    menu(teste);
+    Banco* CABECA = aloca();
+    
+    cria_banco(CABECA);
+    Banco_vazio(CABECA);
+    int conta;
+
+    int opt;
+
+    do{
+        printf("Menu Banco.\n");
+        printf("1 - Verifica banco.\n");
+        printf("2 - Cria banco.\n");
+        printf("3 - Inserir cliente.\n");
+        printf("4 - Remover cliente.\n");
+        printf("5 - Imprimir clientes.\n");
+        printf("0 - Sair.\n");
+        scanf("%d", &opt);
+        getchar(); // limpa o prompt de comando do menu
+
+        switch(opt){
+            case 1:
+            Banco_vazio(CABECA);
+            break;
+
+            case 2:
+            cria_banco(CABECA);
+            break;
+
+            case 3:
+            printf("Insira as informacoes do cliente:\n");
+            insere_ordenado(CABECA);
+            printf("Cliente registrado com sucesso!\n");
+            break;
+
+            case 4:
+            printf("Insira o numero de conta para ser removido:\n");
+            remove_inicio(CABECA, conta);
+            printf("Conta %d removida com sucesso!\n");
+            break;
+
+            case 5:
+            imprime_cliente(CABECA);
+            break;
+
+            case 0:
+            printf("Encerrando...\n");
+            break;
+        }
+
+    }while (opt != 0);
     
     return 0;
 }
@@ -43,102 +85,48 @@ Banco *aloca(){
 
 int Banco_vazio(Banco *CABECA){
     if(CABECA->proximo == NULL){
+        printf("O Banco esta vazio.\n");
         return 1;
         // verdade, lista está vazia.
     }
 
     else{
+        printf("O Banco possui clientes.");
         return 0;
         // falso, a lista Banco não está vazia.
     }
 }
 
-void cria_banco(Banco *CABECA){
-    CABECA -> proximo = NULL;
+Banco *cria_banco(Banco *CABECA){
+    CABECA->proximo = NULL;
+    return CABECA;  
 }
 
-Banco *insere_cliente_inicio(Banco *CABECA, int a){
+Banco *insere_ordenado(Banco *CABECA){
     
-    Banco *novo = aloca();
-    
-    //scanf("%d", &a);
-    
-    if(!novo){
-        printf("Erro ao alocar novo elemento no Banco");
-        return 0;
-    }
-    else{
-        novo->numero_conta = a;
-        novo->proximo = CABECA;
-        CABECA = novo;
-    }
-    return novo;
-}
-
-Banco *insere_cliente_meio(){
-
-}
-
-Banco *insere_cliente_fim(){
-
-}
-
-Banco *remove_cliente_inicio(Banco *CABECA, int x){
-    Banco *aux = NULL; // ponteiro auxiliar para remoção de um elemento no banco
-    Banco *p = CABECA; // ponteiro para percorrer a lista encadeada
-
-    /*Procura elemento na lista, guardando seu anterior */
-    while(p != NULL && p->numero_conta != x){
-        aux = p;
-        p = p->proximo;
-    }
-
-    /* Verificia se o elemento foi encontrado */
-    if(p == NULL){
-        return CABECA; // Elemento não encontrado, retorna CABECA.
-    }
-
-    /* Retirada do elemento encontrado */
-    if(aux == NULL){
-        /*retira elemento do início do Banco*/
-        aux = p->proximo; 
-    }
-
-    free(aux);
-    return CABECA;
-}
-
-Banco *remove_cliente_meio(Banco *CABECA, int x){
-    Banco *aux = NULL;
-    Banco *p = CABECA;
-
-    /*Procura elemento na lista, guardando seu anterior */
-    while(p != NULL && p->numero_conta != x){
-        aux = p;
-        p = p->proximo;
-    }
-
-     /* Verificia se o elemento foi encontrado */
-     if(p == NULL){
-        return CABECA; // Elemento não encontrado, retorna CABECA.
-    }
-
-     /* Retirada do elemento encontrado */
-     if(aux == NULL){
-        /*retira elemento do meio do Banco*/
-        aux->proximo = aux->proximo; 
-    }
-
-    free(aux);
-    return CABECA;
-}
-
-Banco *remove_cliente_fim(){
-
-}
-
-Banco *insere_cliente_ordenado(Banco *CABECA, int x){
     Banco *novo = aloca(); // cria novo node para o Banco
+    
+    int x;
+    char nome[30];
+    float valor;
+
+    printf("Numero da conta:\n");
+    scanf("%d", &x);
+    printf("Nome do cliente:\n");
+    scanf("%29s", nome);
+    printf("Saldo do cliente:\n");
+    scanf("%f", &valor);
+    
+    if(novo == NULL){
+        printf("Sem espaço em memória.\n");
+        return CABECA;
+    }
+
+    novo->numero_conta = x;
+    //novo->nome_cliente = nome;
+    novo->saldo = valor;
+    novo->proximo = NULL;
+
     Banco *aux = NULL; // ponteiro auxiliar
     Banco *p = CABECA; // ponteiro para percorrer o Banco
     
@@ -162,14 +150,51 @@ Banco *insere_cliente_ordenado(Banco *CABECA, int x){
     return CABECA;
 }
 
-void imprime_cliente(Banco *dark_aria){
-    if(Banco_vazio(dark_aria)){
-        printf("Banco sem clientes registrados\n");
+Banco *remove(Banco* CABECA, int v){
+    Banco *aux, *r = NULL;
+    
+
+}   
+Banco *remove_inicio(Banco *CABECA, int x){
+    
+    if(CABECA == NULL || CABECA->proximo == NULL){
+        printf("Banco vazio. Sem contas para remover.\n");
+        return CABECA;
+    }
+    
+    Banco *aux = NULL; // ponteiro auxiliar para remoção de um elemento no banco
+    Banco *p = CABECA; // ponteiro para percorrer a lista encadeada
+    
+    printf("Insira o numero de conta a ser removido.\n");
+    scanf("%d", &x);
+    /*Procura elemento na lista, guardando seu anterior */
+    while(p != NULL && p->numero_conta != x){
+        aux = p;
+        p = p->proximo;
+    }
+
+    /* Verificia se o elemento foi encontrado */
+    if(p == NULL){
+        return CABECA; // Elemento não encontrado, retorna CABECA.
+    }
+
+    /* Retirada do elemento encontrado */
+    if(aux == NULL){
+        /*retira elemento do início do Banco*/
+        aux = p->proximo; 
+    }
+
+    free(aux);
+    return CABECA;
+}
+
+void imprime_cliente(Banco *b){
+    if(Banco_vazio(b)){
+        printf("Banco Vazio.\n");
     }
 
     else{
-        Banco *aux = dark_aria->proximo;
-        
+        Banco *aux = b->proximo;
         while(aux != NULL){
             printf("Nome cliente: %c", aux->nome_cliente[30]);
             printf("NUmero da conta do cliente: %d", aux->numero_conta);
@@ -178,74 +203,4 @@ void imprime_cliente(Banco *dark_aria){
             aux = aux->proximo;
         }
     }
-}
-
-int menu(int opt){
-    
-    do{
-        printf("Menu de Opcoes para utilizar o Banco.\n");
-        printf("1 - Verificar se o banco esta vazio.\n");
-        printf("2 - Criar Banco (Caso esteja vazio)");
-        printf("3 - Inserir informacoes clientes: inicio.\n");
-        printf("4 - Inserir informacoes clientes: meio.\n");
-        printf("5 - Inserir informacoes clientes: fim.\n");
-        printf("6 - Inserir informacoes cliente: ordenado.\n");
-        printf("7 - Remover cliente do banco: inicio.\n");
-        printf("8 - Remover cliente do banco: meio.\n");
-        printf("9 - Remover cliente do banco: fim.\n");
-        printf("10 - Imprimir Banco.\n");
-        printf("11 - Destruir / apagar Banco.\n");
-        printf("0 - Sair do menu.");
-        
-        scanf("%d", &opt);
-
-        switch(opt){
-            case 1:
-            //Banco_vazio();
-            break;
-
-            case 2:
-            //cria_banco();
-            break;
-
-            case 3:
-            //insere_cliente_inicio();
-            break;
-
-            case 4:
-            //insere_cliente_meio();
-            break;
-
-            case 5:
-            //insere_cliente_fim();
-            break;
-
-            case 6:
-            //insere_cliente_ordenado();
-            break;
-
-            case 7:
-            //remove_cliente_inicio();
-            break;
-
-            case 8:
-            //remove_cliente_meio();
-            break;
-
-            case 9:
-            //remove_cliente_fim();
-            break;
-
-            case 10:
-            //imprime_cliente();
-            break;
-
-            case 11:
-            break;
-
-            case 0:
-            break;
-        }
-
-    }while (opt != 0);
 }
