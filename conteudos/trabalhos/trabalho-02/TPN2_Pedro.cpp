@@ -133,6 +133,7 @@ int main (){
         break;
 
         case 3:
+        
             mostrarCliente(cabeca);
             break;
         

@@ -58,7 +58,7 @@ int main() {
                 break;
 
             case 5:
-                printf("Imprimindo clientes alocados no banco:\n");
+                printf("Imprimindo clientes alocados no banco:\n\n");
                 imprime_cliente(CABECA);
                 break;
 
@@ -164,7 +164,8 @@ void imprime_cliente(Banco *b) {
             printf("Nome cliente: %s\n", aux->nome_cliente);
             printf("Numero da conta do cliente: %d\n", aux->numero_conta);
             printf("Saldo do cliente: R$ %.2f\n", aux->saldo);
-            printf("Proximo cliente: 0x%p\n", aux->proximo);
+            printf("Endereco atual do cliente: 0x%p\n", aux->numero_conta);
+            printf("Proximo cliente: 0x%p\n\n", aux->proximo);
             aux = aux->proximo;
         }
     }
