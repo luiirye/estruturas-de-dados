@@ -19,6 +19,15 @@ struct elemento{
 }; 
 typedef struct elemento Elem;
 
+// protótipos de funções para validação
+Elem *aloca();
+Lista  *criaLista();
+void liberaLista(Lista*);
+int tamanhoLista(Lista*);
+int listaVazia(Lista*);
+int insereInicio(Lista*, struct aluno al);
+int insereFinal(Lista* li, struct aluno al);
+
 // teste. Aparentemente, precisa ser manipulada de outra meneira
 // verificar como utilizar a função aloca
 Elem *aloca(){
@@ -85,8 +94,31 @@ int listaVazia(Lista* li){
     inserção final
 
 */
+int insereInicio(Lista* li, struct aluno al){
+    if(li == NULl){ 
+        return 0; // lista não alocada, lista vazia
+    }
+    
+    Elem* no = (Elem*) malloc (sizeof(Elem)); // aloca um novo node dinâmicamente
 
+    if(no == NULL){
+        return 0; // node não alocado
+    }
 
+    no->dados = al; // caso o novo node seja alocado, aponta para dados recebendo a cabeça da lista
+    no->prox = (*li); // novo node aponta para o prox recebendo o proximo elemento
+    no->ant = NULL; // anterior do novo node é NULL, pois está sendo inserido no início
+
+    if(*li != NULL){  // verifica se a lista não é vazia
+        (*li)->ant = no; // o anterior do novo node recebe no
+        *li = no; // o anterior passa a ser o primeiro elemento da lista
+        return 1;
+    }
+}
+
+int insereFinal(Lista* li, struct aluno al){
+
+}
 
 int main(){
     
@@ -102,8 +134,10 @@ int main(){
     int x = tamanhoLista(li);
 
     //utilizando a função lista vazia na main
-    int y = listaVazia(Lista8 li);
+    int y = listaVazia(Lista* li);
     if(listaVazia(li));
+
+    int z = insereInicio(li, dados_aluno);
 
 
     return 0;
