@@ -3,8 +3,8 @@
 
 struct Banco{
     int numero_conta;
-    //char nome[30] = "Paulo";
-    //float saldo;
+    char nome[30] = "Paulo";
+    float saldo;
     struct Banco* proximo;
     struct Banco* anterior;
 };
@@ -61,12 +61,12 @@ void imprime(node* cabeca){
         while(aux != NULL){
             printf("\n");
             printf("---------------------\n");
-            printf("Endereco de node %d: 0x%p.\n", aux->numero_conta, aux);
-            printf("Numero da conta: %d\n", aux->numero_conta);
-            //printf("Nome cliente da conta %d: %s\n", aux->numero_conta, aux->nome);
-            //printf("Saldo da conta %d: %.2f\n", aux->numero_conta, aux->saldo);
-            printf("Anterior do node %d: 0x%p\n", aux->numero_conta, aux->anterior);
-            printf("Proximo do node %d: 0x%p\n", aux->numero_conta, aux->proximo);
+            printf("Endereco de node      %d: 0x%p.\n", aux->numero_conta, aux);
+            printf("Numero da conta         : %d\n", aux->numero_conta);
+            printf("Nome cliente da conta %d: %s\n", aux->numero_conta, aux->nome);
+            printf("Saldo da conta        %d: R$ %.2f\n", aux->numero_conta, aux->saldo);
+            printf("Anterior do node      %d: 0x%p\n", aux->numero_conta, aux->anterior);
+            printf("Proximo do node       %d: 0x%p\n", aux->numero_conta, aux->proximo);
             printf("---------------------\n");
             aux = aux->proximo;
         }
@@ -82,27 +82,39 @@ node* insere_ordenado(node* cabeca){
         exit(1);
     }  
     
-    printf("Infrome um numero para o node:\n");
+    printf("Informe um numero para o node:\n");
     scanf("%d", &novo->numero_conta);
-    //printf("Informe o nome para o node:\n");
-    //scanf("%s", novo->nome);
-    //printf("Informe o saldo para o node:\n");
-    //scanf("%f", &novo->saldo);
+    printf("Informe o nome para o node:\n");
+    scanf("%s", novo->nome);
+    printf("Informe o saldo para o node:\n");
+    scanf("%f", &novo->saldo);
     novo->proximo = NULL;
     novo->anterior = NULL;
-
-    if(cabeca->proximo == NULL){
-        cabeca->proximo= novo;
+    
+    node* aux = cabeca->proximo;
+    while(aux!=NULL){
+        if(aux->numero_conta==novo->numero_conta){
+            printf("Node ja esta cadastrado.\n");
+            free(novo);
+            return aux;
+        }
+        aux = aux-> proximo;
     }
 
-    else{
-        node *aux = cabeca->proximo;
-        novo->proximo = aux;
-        novo->anterior = novo;
+    if(cabeca->proximo == NULL){
         cabeca->proximo = novo;
     }
 
-    return novo;
+    else{
+        node* a1 = cabeca;
+        node* a2 = cabeca->proximo;
+        while(a2 != NULL && a2->numero_conta < novo->numero_conta){
+            a1 = a2;
+            a2 = a2->proximo;
+        }
+        a1->proximo = novo;
+        novo->proximo = a2;
+    }
 }
 
 node* remove(node* cabeca){
