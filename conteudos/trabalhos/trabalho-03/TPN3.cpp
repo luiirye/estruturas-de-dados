@@ -72,4 +72,21 @@ node* insere_ordenado(node* CABECA){
         }
         aux = aux->proximo;
     }
+
+    if(CABECA->proximo){
+        CABECA->proximo = novo;
+    }
+
+    else{
+        node* aux1 = cabeca;
+        node* aux2 = cabeca->proximo;
+        while(aux2 != NULL && aux2->CPF < novo->CPF){
+            // enquanto auxiliar 2 não for NULL e for menor que o CPF novo informado
+            aux1 = aux2;
+            // aux que se torna CABECA, recebe proximo.
+            aux2 = aux2->proximo;
+            // a CABECA aponta proximo proximo.
+            
+        }
+    }
 }
