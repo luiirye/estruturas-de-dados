@@ -86,7 +86,10 @@ node* insere_ordenado(node* CABECA){
             // aux que se torna CABECA, recebe proximo.
             aux2 = aux2->proximo;
             // a CABECA aponta proximo proximo.
-            
+
+            // anterior
+
+
         }
     }
 }
