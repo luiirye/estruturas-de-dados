@@ -24,6 +24,7 @@ node* aloca(); // função para alocar um nó dinâmicamente na memória.
 node* insere_ordenado(node*); // função para inserir um Aluno na lista.
 node* remove(node*); // função para remover um aluno de qualquer posição.
 node* edita(node*); // função para editar um aluno existente na lista.
+float calculo(); // função para calcular a média do aluno.
 void imprime(node*); // função para exibir os alunos cadastrados na lista.
 
 int main(){
@@ -39,6 +40,8 @@ node* insere_ordenado(node* CABECA){
 
     // Criando novo nodeo na memória
     node* novo = aloca();
+    // ponteiro auxiliar
+    node* aux1 = aloca();
     // Verificando se o node foi alocado.
     if(!novo){
         printf("Sem memoria.\n");
@@ -48,7 +51,7 @@ node* insere_ordenado(node* CABECA){
     // Menu para inserção das informações do Aluno.
     printf("Inserindo informacoes aluno.\n");
     printf("CPF: ");
-    scanf("%d", &novo->CPF); // armazena o CPF
+    scanf("%lld", &novo->CPF); // armazena o CPF
     printf("\n");
     printf("Nome: ");
     scanf("%s", novo->nome); // armazena o Nome
@@ -63,33 +66,47 @@ node* insere_ordenado(node* CABECA){
     novo->proximo = NULL;
     novo->anterior = NULL;
 
-    node* aux = CABECA->proximo;
-    while(aux!=NULL){
-        if(aux->CPF == novo->CPF){
-            printf("CPF ja cadastrado.\n");
-            free(novo);
-            return aux;
-        }
-        aux = aux->proximo;
+    // Se a lista estiver vazia
+    if(CABECA == NULL){
+        CABECA = novo;
     }
 
-    if(CABECA->proximo){
-        CABECA->proximo = novo;
+    // Se o novo node precisar ser alocado antes do primeiro node
+    else if(novo->CPF < CABECA->CPF){
+        novo->proximo = CABECA;
+        CABECA->anterior = novo;
+        CABECA = novo;
     }
 
+    // Se o novo node precisar ser inserido depois dos primeiros nodes
     else{
         node* aux1 = CABECA;
-        node* aux2 = CABECA->proximo;
-        while(aux2 != NULL && aux2->CPF < novo->CPF){
-            // enquanto auxiliar 2 não for NULL e for menor que o CPF novo informado
-            aux1 = aux2;
-            // aux que se torna CABECA, recebe proximo.
-            aux2 = aux2->proximo;
-            // a CABECA aponta proximo proximo.
-            aux2->anterior = novo;
-            // anterior
-            CABECA->proximo = novo;
-            CABECA->anterior = NULL;
+        while(aux1->proximo != NULL && novo->CPF > aux1->proximo->CPF){
+            aux1 = aux1->proximo;
+        }
+        novo->proximo = aux1->proximo;
+        if(aux1->proximo != NULL){
+            aux1 = aux1->proximo;
+            aux1->anterior = novo;
         }
     }
+    return CABECA;
+}
+
+node* remove(node* CABECA){
+    if(CABECA->proximo==NULL){
+        printf("Lista esta vazia, nada para remover.\n");
+        return CABECA;
+    }
+    else{
+        
+    }
+
+}
+
+float calculo(){
+    node* aux1;
+    node* aux2;
+    float media;
+    return media = (aux1->nota1 + aux2->nota2)/2.0;
 }
